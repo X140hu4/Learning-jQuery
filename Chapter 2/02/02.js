@@ -5,5 +5,9 @@ $(document).ready(function() {
         $('a[href$=".pdf"]').addClass('pdflink');
         $('a[href^="http"][href*="henry"]').addClass('henrylink');
         $('tr:nth-child(odd)').addClass('alt');
-        $('td:contains(Henry)').addClass('highlight');
+        $('td:contains(Henry)').parent().children().addClass('highlight');
+
+        $('a').filter(function() {
+            return this.hostname && this.hostname != location.hostname;
+            }).addClass('external');
         });
