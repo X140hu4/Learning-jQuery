@@ -1,17 +1,17 @@
 $(document).ready(function() {
 	$('#switcher-default').addClass('selected');
 
-	$('#switcher button').click(function() {
-		var bodyClass = this.id.split('-')[1];
-
-		$('body').removeClass().addClass(bodyClass);
-
-		$('#switcher button').removeClass('selected');
-		$(this).addClass('selected');
-	});
-
 	$('#switcher').click(function(event) {
-		if(event.target == this) {
+		if ($(event.target).is('button')) {
+
+			var bodyClass = event.target.id.split('-')[1];
+
+			$('body').removeClass().addClass(bodyClass);
+
+			$('#switcher button').removeClass('selected');
+			$(tevent.targe).addClass('selected');
+			event.stopPropagation();
+		} else {
 			$('#switcher button').toggleClass('hidden');
 		}
 	});
