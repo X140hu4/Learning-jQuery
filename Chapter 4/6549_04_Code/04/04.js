@@ -31,4 +31,33 @@ $(document).ready(function() {
 		}
 		return false;
 	});
+
+	$('div.label').click(function() {
+		var paraWidth = $('div.speech p').outerWidth();
+		var $switcher = $(this).parent();
+		var switcherWidth = $switcher.outerWidth();
+		$switcher.css({position: 'relative',})
+		.fadeTo('fast', 0.5)
+		.animate({
+			left: paraWidth - switcherWidth,
+		}, {
+			duration: 'slow',
+			queue: false,
+		})
+		.fadeTo('slow', 1.0)
+		.slideUp('slow', function() {
+			$switcher.css({backgroundColor: '#f00'});
+		})
+		.slideDown('slow');
+	});
+
+	$('p').eq(2)
+		.css('border', '1px solid #333')
+		.click(function() {
+			var $clickedItem = $(this);
+			$clickedItem.next().slideDown('slow', function() {
+				$clickedItem.slideUp('slow');
+			});
+		});
+	$('p').eq(3).css('backgroundColor', '#ccc').hide();
 });
