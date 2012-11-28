@@ -12,8 +12,11 @@ $(document).ready(function() {
 	$('<a href="#top">back to top</a>').insertAfter('div.chapter p');
 	$('<a id="top"></a>').prependTo('body');
 
-	$('span.footnote')
-		.insertBefore('#footer')
-		.wrapAll('<ol id="notes"></ol>')
-		.warp('<li></li>');
+	var $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
+	$('span.footnote').each(function(index) {
+		$(this)
+		.before('<sup>' + (index + 1) + '</sup>')
+		.appendTo($notes)
+		.wrap('<li></li>');
+	});
 });
