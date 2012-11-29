@@ -15,8 +15,22 @@ $(document).ready(function() {
 	var $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
 	$('span.footnote').each(function(index) {
 		$(this)
-		.before('<sup>' + (index + 1) + '</sup>')
+		.before([
+			'<a href="#footnote-',
+			index + 1,
+			'" id="context-',
+			index + 1,
+			'" class="context">',
+			'<sup>',
+		        index + 1,
+		       	'</sup></a>',
+			].join(''))
 		.appendTo($notes)
-		.wrap('<li></li>');
+		.append([
+			'&nbsp;(<a href="#context-',
+			index + 1,
+			'">context</a>)',
+			].join(''))
+		.wrap('<li id="footnote-' + (index + 1) + '"></li>');
 	});
 });
