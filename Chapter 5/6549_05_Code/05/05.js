@@ -33,4 +33,20 @@ $(document).ready(function() {
 			].join(''))
 		.wrap('<li id="footnote-' + (index + 1) + '"></li>');
 	});
+
+	$('span.pull-quote').each(function(index) {
+		var $parentParagraph = $(this).parent('p');
+		$parentParagraph.css('position', 'relative');
+
+		var $clonedCopy = $(this).clone();
+		$clonedCopy
+			.addClass('pulled')
+			.find('span.drop')
+				.html('&hellip;')
+			.end()
+			.text($clonedCopy.text())
+			.prependTo($parentParagraph)
+			.addClass('rounded-top')
+			.wrapInner('<div class="rounded-bottom"></div>');
+	});
 });
