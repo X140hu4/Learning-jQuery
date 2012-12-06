@@ -1,7 +1,10 @@
 $(document).ready(function() {
 	$('#letter-a a').click(function() {
-		$('#dictionary').hide().load('a.html', function() {
-			$(this).fadeIn();
+		$.ajax({
+			url: 'a.html',
+			success: function(data) {
+				$('#dictionary').html(data);
+			}
 		});
 		return false;
 	});
@@ -79,6 +82,34 @@ $(document).ready(function() {
 			$('#dictionary')
 			.html('An error occurred: ' + jqXHR.status)
 			.append(jqXHR.responseText);
+		});
+		return false;
+	});
+
+	var url = 'http://examples.learningjquery.com/jsonp/g.php';
+	$('#letter-g a').click(function() {
+		$.getJSON(url + '?callback=?', function(data) {
+			var html = '';
+			$.each(data, function(entryIndex, entry) {
+				html += '<div class="entry">';
+				html += '<h3 class="term">' + entry.term + '</h3>';
+				html += '<div class="part">' + entry.part+ '</div>';
+				html += '<div class="definition">';
+				html += entry.definition;
+				if (entry.quote) {
+					html += '<div class="quote">';
+					$.each(entry.quote, function(lineIndex, line) {
+						html += '<div class="quote-line">' + line + '</div>';	
+					});
+					if (entry.author) {
+						html += '<div class="quote-author">' + entry.author + '</div>';
+					}
+					html += '</div>';
+				}
+				html += '</div>';
+				html += '</div>';
+			});
+			$('#dictionary').html(html);
 		});
 		return false;
 	});
