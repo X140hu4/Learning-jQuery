@@ -1,7 +1,12 @@
 $(document).ready(function() {
 	$('#letter-a a').click(function() {
-		$.ajax({
+		$.ajaxSetup({
 			url: 'a.html',
+			type: 'POST',
+			dataType: 'html',
+		});
+		$.ajax({
+			type: 'GET',
 			success: function(data) {
 				$('#dictionary').html(data);
 			}
@@ -111,6 +116,11 @@ $(document).ready(function() {
 			});
 			$('#dictionary').html(html);
 		});
+		return false;
+	});
+
+	$('#letter-h a').click(function() {
+		$('#dictionary').load('h.html .entry');
 		return false;
 	});
 
